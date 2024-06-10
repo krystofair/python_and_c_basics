@@ -1,7 +1,9 @@
+// should be first include in file when something else is included too.
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
-// define audio library I want to use in my module.
 
+
+// This is protocol to create python functions in module or classes in module.
 static PyObject* maslanka(PyObject* self, PyObject* args) {
     int zmienna = -1;
     if (!PyArg_ParseTuple(args, "i", &zmienna)) {
@@ -24,7 +26,8 @@ static PyModuleDef kudiomodule = {
     KudioMethods
 };
 
-
+// watch out that all other functions or definitions have static keyword
+// but this one does not, this one used btw a special MACRO.
 PyMODINIT_FUNC
 PyInit_kudio(void) {
     return PyModule_Create(&kudiomodule);
